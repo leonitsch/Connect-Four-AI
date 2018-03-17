@@ -24,6 +24,10 @@ public class Matrix {
 		return this.data[row][col];
 	}
 
+	public void setData(int row, int col, double value){
+		this.data[row][col] = value;
+	}
+
 	public void print(){
 		System.out.println("---------------------------");
 		for(int i=0; i<this.rows; i++){
@@ -69,8 +73,17 @@ public class Matrix {
 	}
 
 	public static Matrix mult(Matrix a, Matrix b){
-		//TODO
-		return new Matrix(1,1);
+		Matrix result = new Matrix(a.getRows(), b.getCols());
+		for(int i=0; i<result.getRows(); i++){
+			for(int j=0; j<result.getCols(); j++){
+				double sum = 0;
+				for(int k=0; k<a.getCols(); k++){
+					sum += a.getData(i,k) * b.getData(k,j); 
+				}
+				result.setData(i,j,sum);
+			}
+		}
+		return result;
 	}
 
 
